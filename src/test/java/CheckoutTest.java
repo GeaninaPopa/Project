@@ -20,12 +20,7 @@ public class CheckoutTest extends Hooks {
         wait = new WebDriverWait(driver, 10);
     }
 
-    @Test(description = "CHECKOUT TEST")
-    public void checkoutTest() throws InterruptedException {
-
-    }
-
-    @Test(description = "searching keywords")
+    @Test(description = " Test the search functionality")
     public void searchTest() {
 
         checkoutPage.setSearchBar();
@@ -42,7 +37,7 @@ public class CheckoutTest extends Hooks {
         Thread.sleep(4000);
     }
 
-   @Test(description = "Calculating the price when changing quantity")
+    @Test(description = "Calculating the price when changing quantity")
     public void quantityOfAProductTest() {
         checkoutPage.clickAddProductGraniteChipsToCartLink();
         checkoutPage.clickAddProductGraniteChipsToCartButton();
@@ -65,10 +60,72 @@ public class CheckoutTest extends Hooks {
         ExtentTestNGITestListener.getTest().log(Status.INFO, "The tax price is:" + checkoutPage.taxPrice());
         double expectedTotal = checkoutPage.productPrice() + checkoutPage.taxPrice();
         ExtentTestNGITestListener.getTest().log(Status.INFO, "The total price should be" + expectedTotal);
-        ExtentTestNGITestListener.getTest().log(Status.INFO,"The total price is"+ checkoutPage.totalAmount());
+        ExtentTestNGITestListener.getTest().log(Status.INFO, "The total price is" + checkoutPage.totalAmount());
         assertEquals(checkoutPage.totalAmount(), expectedTotal);
     }
 
 
+    @Test(description = "add a product to cart")
+    public void addAProductToCartTest() {
+        checkoutPage.setAwesomeGranitChips();
+        checkoutPage.clickAddProductGraniteChipsToCartButton();
+    }
 
+    @Test(description = "checkout ")
+    public void addAOrderTest() {
+        checkoutPage.setFirstNameField();
+        checkoutPage.setLastNameField();
+        checkoutPage.setAddressField();
+        checkoutPage.setContinueCheckoutButton();
+        checkoutPage.setCompleteYourOrderButton();
+        assertEquals(checkoutPage.getThankYouMessage().getText(), "Thank you for your order!");
+    }
+
+    @Test(description = "negative checkout ")
+    public void negativeAddAOrderTest() {
+        checkoutPage.setFirstNameField();
+        checkoutPage.setAddressField();
+        checkoutPage.setContinueCheckoutButton();
+        checkoutPage.setCompleteYourOrderButton();
+        assertEquals(checkoutPage.getErrorMessage().getText(), "Last Name is required");
+
+    }
+
+    @Test(description = "negative checkout2")
+    public void checkoutWithoutFirstNameTest() {
+        checkoutPage.setLastNameField();
+        checkoutPage.setAddressField();
+        checkoutPage.setContinueCheckoutButton();
+        checkoutPage.setCompleteYourOrderButton();
+        assertEquals(checkoutPage.getErrorMessage().getText(), "First Name is required");
+    }
+
+    @Test(description = "testing checkout without address ")
+    public void checkoutWithoutAddress() {
+        checkoutPage.setFirstNameField();
+        checkoutPage.setLastNameField();
+        checkoutPage.setContinueCheckoutButton();
+        checkoutPage.setCompleteYourOrderButton();
+        assertEquals(checkoutPage.getErrorMessage().getText(), "Address is required");
+    }
+
+    @Test
+    public void sortProductsTest2() throws InterruptedException {
+        checkoutPage.selectOption(checkoutPage.getSortProductsDropDown(), "Sort by name (A to Z)");
+        Thread.sleep(4000);
+    }
+
+    @Test
+    public void sortProductsTest3() throws InterruptedException {
+        checkoutPage.selectOption(checkoutPage.getSortProductsDropDown(), "Sort by name (Z to A)");
+        Thread.sleep(4000);
+    }
+    @Test( description = "adding a product to wishlist")
+    public void addProductToWishlistTest() throws InterruptedException{
+        checkoutPage.getGorgeousSoftPizza();
+        checkoutPage.getWishlistButton();
+        checkoutPage.getWishlistProduct();
+        Thread.sleep(4000);
+
+    }
 }

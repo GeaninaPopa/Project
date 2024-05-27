@@ -20,7 +20,7 @@ public class LoginTest extends Hooks {
         wait = new WebDriverWait(driver, 10);
     }
 
-    @Test
+    @Test (description = "Testing login functionality")
     public void loginTest() throws InterruptedException {
         loginPage.clickLoginButton();
         loginPage.setUsernameButton();
@@ -29,28 +29,35 @@ public class LoginTest extends Hooks {
         assertEquals(loginPage.getCorrectName().getText(), "dino");
     }
 
-    @Test
+    @Test (description = "Testing negative login functionality without username")
     public void negativeLoginTest1() throws InterruptedException {
         loginPage.clickLoginButton();
-        ExtentTestNGITestListener.getTest().log(Status.INFO, "informatii");
         loginPage.setPasswordButton();
         loginPage.clickLoginIcon();
         assertEquals(loginPage.getLoginErrorMessage().getText(), "Please fill in the username!");
 
     }
-    @Test
+    @Test (description = "Negative login without password")
     public void negativeLoginTest2() throws InterruptedException {
         loginPage.clickLoginButton();
         loginPage.setUsernameButton();
         loginPage.clickLoginIcon();
         assertEquals( loginPage.getLoginErrorMessage().getText(),"Please fill in the password!");
     }
-    @Test
+    @Test (description = "login with incorrect password")
     public void negativeLoginTest3() throws InterruptedException {
         loginPage.clickLoginButton();
         loginPage.setUsernameButton();
         loginPage.setIncorrectPaswoard();
         loginPage.clickLoginIcon();
         assertEquals(loginPage.getLoginErrorMessage().getText(), "Incorrect username or password!");
+    }
+    @Test (description = "Login with incorrect username")
+    public void negativeLoginTest4() throws InterruptedException{
+        loginPage.clickLoginButton();
+        loginPage.setIncorrectUsername();
+        loginPage.setPasswordButton();
+        loginPage.clickLoginIcon();
+        assertEquals(loginPage.getLoginErrorMessage().getText(),"Incorrect username or password!");
     }
 }

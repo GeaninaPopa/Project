@@ -49,4 +49,9 @@ public class LoginPage extends BasePage {
     public WebElement getLoginErrorMessage(){
         return loginErrorMessage;
     }
+    @FindBy(id="user-name")
+    private WebElement incorrectUsername;
+    public void setIncorrectUsername(){
+        incorrectUsername.sendKeys("geanina");
+    }
 }
