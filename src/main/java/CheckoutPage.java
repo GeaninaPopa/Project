@@ -60,6 +60,13 @@ public class CheckoutPage extends BasePage {
         return sortProductsDropDown;
     }
 
+    @FindBy(css = "option[value'lh']")
+    private WebElement optionLH;
+
+    public WebElement getOptionLH() {
+        return optionLH;
+    }
+
     public void selectOption(WebElement element, String option) {
         Select optionSelect = new Select(element);
         optionSelect.selectByVisibleText(option);
@@ -71,6 +78,7 @@ public class CheckoutPage extends BasePage {
     public void clickAddProductGraniteChipsToCartLink() {
         addProductGraniteChipsToCartLink.click();
     }
+
 
     @FindBy(css = ".svg-inline--fa.fa-cart-plus.fa-w-18.fa-3x")
     private WebElement addProductGraniteChipsToCartButton;
@@ -138,21 +146,21 @@ public class CheckoutPage extends BasePage {
     private WebElement firstNameField;
 
     public void setFirstNameField() {
-        firstNameField.sendKeys("");
+        firstNameField.sendKeys("Geanina");
     }
 
     @FindBy(id = "last-name")
     private WebElement lastNameField;
 
     public void setLastNameField() {
-        lastNameField.sendKeys("");
+        lastNameField.sendKeys("Popa");
     }
 
     @FindBy(id = "address")
     private WebElement addressField;
 
     public void setAddressField() {
-        addressField.sendKeys();
+        addressField.sendKeys("");
     }
 
     @FindBy(css = ".btn.btn-success")
@@ -186,22 +194,77 @@ public class CheckoutPage extends BasePage {
     @FindBy(linkText = "Gorgeous Soft Pizza")
     private WebElement gorgeousSoftPizza;
 
-    public WebElement getGorgeousSoftPizza() {
-        return gorgeousSoftPizza;
+    public void getGorgeousSoftPizza() {
+       gorgeousSoftPizza.click();
 
     }
 
-    @FindBy(css = ".svg-inline--fa fa-heart-broken fa-w-16 fa-2x ")
+    @FindBy(css = ".btn.btn-link")
     private WebElement wishlistButton;
 
-    public WebElement getWishlistButton() {
-        return wishlistButton;
+    public void getWishlistButton() {
+
+        wishlistButton.click();
     }
 
-    @FindBy(css = ".shopping-cart-icon fa-layers fa-fw ")
+    @FindBy(css = ".fade.modal.show")
     private WebElement wishlistProduct;
 
-    public WebElement getWishlistProduct() {
-        return wishlistProduct;
+    public void getWishlistProduct() {
+        wishlistProduct.click();
+    }
+
+    @FindBy(css = "option[value='az']")
+    private WebElement optionAZ;
+
+    public WebElement getOptionAZ() {
+        return optionAZ;
+    }
+
+    @FindBy(css = ".text-muted")
+    private WebElement yourCart;
+
+    public WebElement getYourCart() {
+        return yourCart;
+    }
+
+    @FindBy(css = "option[value='za']")
+    private WebElement optionZA;
+
+    public WebElement getOptionZA() {
+        return optionZA;
+    }
+
+    @FindBy(css = ".svg-inline--fa.fa-trash.fa-w-14")
+    private WebElement deleteButton;
+
+    public void getDeleteButton() {
+       deleteButton.click();
+    }
+    @FindBy(css = ".text-center.container")
+    private WebElement cartMessage;
+
+    public WebElement getCartMessage() {
+        return cartMessage;
+    }
+
+    @FindBy(css = ".fa-layers-counter.shopping_cart_badge")
+    private WebElement wishlistIcon;
+
+    public void setWishlistIcon(){
+        wishlistIcon.click();
+    }
+    @FindBy(css = ".fade.modal.show")
+    private WebElement resetButton;
+
+    public void setResetButton(){
+        resetButton.click();
+    }
+    @FindBy(css = "option[value='liho']")
+    private WebElement optionLHO;
+
+    public WebElement getOptionLHO() {
+        return optionLHO;
     }
 }
+

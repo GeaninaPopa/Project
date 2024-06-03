@@ -34,7 +34,7 @@ public class CheckoutTest extends Hooks {
     @Test
     public void sortProductsTest() throws InterruptedException {
         checkoutPage.selectOption(checkoutPage.getSortProductsDropDown(), "Sort by price (low to high)");
-        Thread.sleep(4000);
+      assertEquals(checkoutPage.getOptionLHO().getText(),"Sort by price (low to high)");
     }
 
     @Test(description = "Calculating the price when changing quantity")
@@ -69,10 +69,16 @@ public class CheckoutTest extends Hooks {
     public void addAProductToCartTest() {
         checkoutPage.setAwesomeGranitChips();
         checkoutPage.clickAddProductGraniteChipsToCartButton();
+        checkoutPage.clickCartButton();
+
     }
 
     @Test(description = "checkout ")
     public void addAOrderTest() {
+        checkoutPage.setAwesomeGranitChips();
+        checkoutPage.clickAddProductGraniteChipsToCartButton();
+        checkoutPage.clickCartButton();
+        checkoutPage.setContinueCheckoutButton();
         checkoutPage.setFirstNameField();
         checkoutPage.setLastNameField();
         checkoutPage.setAddressField();
@@ -81,18 +87,33 @@ public class CheckoutTest extends Hooks {
         assertEquals(checkoutPage.getThankYouMessage().getText(), "Thank you for your order!");
     }
 
+    @Test(description = "testing reset button")
+    public void resetButtonTest() throws InterruptedException {
+        checkoutPage.setAwesomeGranitChips();
+        checkoutPage.getWishlistButton();
+        checkoutPage.setResetButton();
+
+    }
     @Test(description = "negative checkout ")
     public void negativeAddAOrderTest() {
+        checkoutPage.setAwesomeGranitChips();
+        checkoutPage.clickAddProductGraniteChipsToCartButton();
+        checkoutPage.clickCartButton();
+        checkoutPage.setContinueCheckoutButton();
         checkoutPage.setFirstNameField();
         checkoutPage.setAddressField();
         checkoutPage.setContinueCheckoutButton();
         checkoutPage.setCompleteYourOrderButton();
-        assertEquals(checkoutPage.getErrorMessage().getText(), "Last Name is required");
+       assertEquals("Last Name is required", checkoutPage.getErrorMessage().getText());
 
     }
 
     @Test(description = "negative checkout2")
     public void checkoutWithoutFirstNameTest() {
+        checkoutPage.setAwesomeGranitChips();
+        checkoutPage.clickAddProductGraniteChipsToCartButton();
+        checkoutPage.clickCartButton();
+        checkoutPage.setContinueCheckoutButton();
         checkoutPage.setLastNameField();
         checkoutPage.setAddressField();
         checkoutPage.setContinueCheckoutButton();
@@ -102,6 +123,10 @@ public class CheckoutTest extends Hooks {
 
     @Test(description = "testing checkout without address ")
     public void checkoutWithoutAddress() {
+        checkoutPage.setAwesomeGranitChips();
+        checkoutPage.clickAddProductGraniteChipsToCartButton();
+        checkoutPage.clickCartButton();
+        checkoutPage.setContinueCheckoutButton();
         checkoutPage.setFirstNameField();
         checkoutPage.setLastNameField();
         checkoutPage.setContinueCheckoutButton();
@@ -112,20 +137,42 @@ public class CheckoutTest extends Hooks {
     @Test
     public void sortProductsTest2() throws InterruptedException {
         checkoutPage.selectOption(checkoutPage.getSortProductsDropDown(), "Sort by name (A to Z)");
-        Thread.sleep(4000);
+        assertEquals("Sort by name (A to Z)", checkoutPage.getOptionAZ().getText());
     }
 
     @Test
     public void sortProductsTest3() throws InterruptedException {
         checkoutPage.selectOption(checkoutPage.getSortProductsDropDown(), "Sort by name (Z to A)");
-        Thread.sleep(4000);
+        assertEquals(checkoutPage.getOptionZA().getText(), "Sort by name (Z to A)");
     }
-    @Test( description = "adding a product to wishlist")
-    public void addProductToWishlistTest() throws InterruptedException{
+
+    @Test(description = "adding a product to wishlist")
+    public void addProductToWishlistTest() throws InterruptedException {
         checkoutPage.getGorgeousSoftPizza();
         checkoutPage.getWishlistButton();
         checkoutPage.getWishlistProduct();
-        Thread.sleep(4000);
 
     }
+
+    @Test(description = "delete a product to cart")
+    public void deleteProductToCart() {
+        checkoutPage.setAwesomeGranitChips();
+        checkoutPage.clickAddProductGraniteChipsToCartButton();
+        checkoutPage.clickCartButton();
+        checkoutPage.getDeleteButton();
+        assertEquals(checkoutPage.getCartMessage().getText(), "How about adding some products in your cart?");
+
+    }
+    @Test(description = "testing checkout without completing any fields ")
+    public void checkoutIncompleteTest() {
+        checkoutPage.setAwesomeGranitChips();
+        checkoutPage.clickAddProductGraniteChipsToCartButton();
+        checkoutPage.clickCartButton();
+        checkoutPage.setContinueCheckoutButton();
+        checkoutPage.setContinueCheckoutButton();
+        checkoutPage.setCompleteYourOrderButton();
+        assertEquals(checkoutPage.getErrorMessage().getText(), "First Name is required");
+    }
+
+
 }
