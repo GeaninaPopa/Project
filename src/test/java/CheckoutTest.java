@@ -22,12 +22,9 @@ public class CheckoutTest extends Hooks {
 
     @Test(description = " Test the search functionality")
     public void searchTest() {
-
         checkoutPage.setSearchBar();
         checkoutPage.setSearchButton();
-        checkoutPage.getFrozenMouse();
-        checkoutPage.getPracticalMouse();
-        checkoutPage.clickSearchButtonFail();
+   assertEquals("Refined Frozen Mouse",checkoutPage.getFrozenMouse().getText());
 
     }
 

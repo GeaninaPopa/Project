@@ -36,22 +36,16 @@ public class CheckoutPage extends BasePage {
     private WebElement frozenMouse;
 
     public WebElement getFrozenMouse() {
-        return frozenMouse;
+       return frozenMouse;
     }
 
     @FindBy(linkText = "Practical Metal Mouse")
     private WebElement practicalMouse;
 
     public WebElement getPracticalMouse() {
-        return practicalMouse;
+     return practicalMouse;
     }
 
-    @FindBy(css = ".btn.btn-light.btn-sm")
-    private WebElement searchButtonFail;
-
-    public void clickSearchButtonFail() {
-        searchButtonFail.click();
-    }
 
     @FindBy(css = ".sort-products-select.form-control.form-control-sm")
     private WebElement sortProductsDropDown;
@@ -160,7 +154,7 @@ public class CheckoutPage extends BasePage {
     private WebElement addressField;
 
     public void setAddressField() {
-        addressField.sendKeys("");
+        addressField.sendKeys("cluj");
     }
 
     @FindBy(css = ".btn.btn-success")
@@ -177,7 +171,7 @@ public class CheckoutPage extends BasePage {
         completeYourOrderButton.click();
     }
 
-    @FindBy(linkText = "Thank you for your order!")
+    @FindBy(css=".text-center")
     private WebElement thankYouMessage;
 
     public WebElement getThankYouMessage() {
@@ -260,7 +254,7 @@ public class CheckoutPage extends BasePage {
     public void setResetButton(){
         resetButton.click();
     }
-    @FindBy(css = "option[value='liho']")
+    @FindBy(css = "option[value='lohi']")
     private WebElement optionLHO;
 
     public WebElement getOptionLHO() {
